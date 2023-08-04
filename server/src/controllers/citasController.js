@@ -1,7 +1,6 @@
 import { Citas } from "../models/Citas.js";
 import { Clases } from "../models/Clases.js";
 
-
 export const getAllCitas = async (req, res) =>{
     try {
         const getAllCitas =  await Citas.findAll({

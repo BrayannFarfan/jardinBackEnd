@@ -2,8 +2,15 @@ import { Citas } from "../models/Citas.js"
 import { Clases } from "../models/Clases.js"
 
 export const getAllClases = async (req, res) =>{
+    const { page, pageSize } = req.query;
+
+    const limit = parseInt(pageSize) || 5;
+    const offset = (parseInt(page) -1 ) * limit || 0;
     try {
-        const getAllClases =  await Clases.findAll()
+        const getAllClases =  await Clases.findAll({
+            limit,
+            offset
+        })
         res.status(200).json({getAllClases})
     } catch (error) {
         res.status(500).json({error: error.message})
