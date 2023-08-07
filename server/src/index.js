@@ -6,6 +6,8 @@ import { clasesRouter } from './routes/clasesRouter.js';
 import { contactosRouter } from './routes/contactoRouter.js';
 import { newslattersRouter } from './routes/newslatterRouter.js';
 import { profesoresRouter } from './routes/profesoresRouter.js';
+import { LoginRouter } from './routes/loginRouter.js';
+import { RegistroRouter } from './routes/registerRouter.js';
 
 
 const PORT = process.env.PORT || 3000;
@@ -21,6 +23,8 @@ app.use('/api/clases', clasesRouter);
 app.use('/api/contactos', contactosRouter);
 app.use('/api/newslatters', newslattersRouter);
 app.use('/api/profesores', profesoresRouter);
+app.use('/api/login', LoginRouter);
+app.use('/api/register', RegistroRouter);
 
 
 app.listen(PORT, ()=>{
