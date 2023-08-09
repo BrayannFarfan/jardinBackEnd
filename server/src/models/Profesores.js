@@ -9,7 +9,7 @@ export const Profesor = sequelize.define('Profesores',{
         type: DataTypes.STRING,
     },
     foto:{
-        type: DataTypes.BLOB
+        type: DataTypes.STRING
     }
 },{
     timestamps: false

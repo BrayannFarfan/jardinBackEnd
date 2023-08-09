@@ -1,5 +1,4 @@
-import { Citas } from "../models/Citas.js"
-import { Clases } from "../models/Clases.js"
+import { Clases } from "../models/Clases.js";
 
 export const getAllClases = async (req, res) =>{
     const { page, pageSize } = req.query;
@@ -17,7 +16,13 @@ export const getAllClases = async (req, res) =>{
     }
 }
 export const getOneClases = async (req, res) =>{
-    res.json({data:'soy una las clases'})
+    const { id } = req.params;
+    try {
+        const getOneClases = await Clases.findByPk(id);
+        return res.status(200).json({data: getOneClases})
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
 }
 export const createOneClases = async (req, res) =>{
     const { titulo,descripcion,edad,totalSesiones,tiempo,aranceles } = req.body;
@@ -37,8 +42,27 @@ export const createOneClases = async (req, res) =>{
     }
 }
 export const updateOneClases = async (req, res) =>{
-    res.json({data:'soy la actualziacion de clases'})
+    const { id } = req.params;
+
+    try {
+        const updateOneClases = await Clases.findByPk(id);
+        updateOneClases.set(req.body);
+        updateOneClases.save();
+        return res.status(200).json({data:updateOneClases})
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
 }
 export const deleteClases = async (req, res) =>{
-    res.json({data:'soy el delete clases'})
+    const { id } = req.params;
+    try {
+        const deleteClases = await Clases.destroy({
+            where:{
+                id
+            }
+        })
+        return res.status(200).json({data: deleteClases})
+    } catch (error) {
+        return res.status(500).json({error: error.message}); 
+    }
 }
