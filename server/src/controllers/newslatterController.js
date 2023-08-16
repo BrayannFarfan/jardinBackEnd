@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { Newslatter } from '../models/Newslatter.js';
 import { envioEmail } from './sendEmail.js';
 
@@ -21,11 +22,13 @@ export const subscribe = async (req, res) =>{
     }
 }
 export const deleteSubscribe = async (req, res) =>{
-    const { email } = req.body;
+    const { email } = req.query;
     try {
         const deleteSubscribe = await Newslatter.destroy({
             where:{
-                email
+                email:{
+                    [Op.eq]: email,
+                }
             }
         })
         const userEmail = email;

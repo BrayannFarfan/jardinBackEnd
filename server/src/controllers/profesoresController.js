@@ -19,9 +19,7 @@ export const getOneProfesores = async (req, res) =>{
     }
 }
 export const createOneProfesores = async (req, res) =>{
-    const { nombre, asignatura, foto} = req.body;
-    console.log(req.file);
-    console.log({nombre,asignatura,foto});
+    const { nombre, asignatura} = req.body;
     try {
         const createOneProfesores = await Profesor.create({
             nombre, 
@@ -34,8 +32,27 @@ export const createOneProfesores = async (req, res) =>{
     }
 }
 export const updateOneProfesores = async (req, res) =>{
-    res.json({data:'soy la actualziacion de Profesores'})
+    const { id } = req.params;
+
+    try {
+        const updateOneProfesores = await Profesor.findByPk(id);
+        updateOneProfesores.set(req.body);
+        updateOneProfesores.save();
+        return res.status(200).json({data: updateOneProfesores})
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
 }
 export const deleteProfesores = async (req, res) =>{
-    res.json({data:'soy el delete Profesores'})
+    const { id } = req.params;
+    try {
+        const deleteProfesores = await Profesor.destroy({
+            where:{
+                id
+            }
+        })
+        return res.status(200).json({data:deleteProfesores})
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
 }

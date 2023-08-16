@@ -6,6 +6,7 @@ export const getOneUser = async (req , res) =>{
     const { email , password } = req.body; 
 
     try {
+        if(email == "" && password == "") return res.status(400).json({message: 'Ingrese correctamente los campos'})
         const getOneUser = await Usuario.findOne({
             where:{
                 email
@@ -20,9 +21,9 @@ export const getOneUser = async (req , res) =>{
                 return res.status(401).json({message:'Las credenciales son incorrectas'})
             }
 
-            const token = jwt.sign({user: getOneUser.id}, 'secreto', {expiresIn: '1h'});
+            const token = jwt.sign({user: getOneUser.id}, 'secreto', {expiresIn: '24h'});
             return res.status(200).json({data: token});
     }catch (error) {
-       return res.status(500).json({error: error.message})
+            return res.status(500).json({error: error.message})
     }
 }

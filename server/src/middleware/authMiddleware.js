@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 
 export const AuthSession = (req, res, next) =>{
-    //TEXT PLANE IS HEADER NAME
-    const token = req.header('Authorization');
+
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
     if(!token){
         return res.status(401).json({error:'Acceso no autorizado'});

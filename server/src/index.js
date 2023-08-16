@@ -10,6 +10,8 @@ import { profesoresRouter } from './routes/profesoresRouter.js';
 import { LoginRouter } from './routes/loginRouter.js';
 import { RegistroRouter } from './routes/registerRouter.js';
 import { fileURLToPath } from 'url';
+import { swaggerSpec } from './middleware/swaggerConfig.js';
+import swaggerUi from 'swagger-ui-express';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -28,6 +30,7 @@ app.use('/api/newslatters', newslattersRouter);
 app.use('/api/profesores', profesoresRouter);
 app.use('/api/login', LoginRouter);
 app.use('/api/register', RegistroRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 app.listen(PORT, ()=>{

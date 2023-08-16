@@ -29,13 +29,13 @@ export const getOneCitas = async (req, res) =>{
     }
 }
 export const createOneCita = async (req, res) =>{
-    const { nombre, email, clasesId} = req.body;
+    const { nombre, email, ClaseId} = req.body;
 
 try {
     const createOneCita = await Citas.create({
         nombre,
         email,
-        clasesId
+        ClaseId
     })
     res.status(200).json({data: createOneCita})
 } catch (error) {

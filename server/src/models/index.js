@@ -6,12 +6,8 @@ import { Profesor } from './Profesores.js';
 import { Usuario } from './Usuario.js';
 
 
-
-// Citas.belongsToMany(Clases,{through:'CitasClases'});
-// Clases.belongsToMany(Citas,{through:'CitasClases'});
-
 Clases.hasMany(Citas)
-Citas.belongsTo(Clases,{foreignKey: 'clasesId'});
+Citas.belongsTo(Clases);
 
 await Clases.sync();
 await Citas.sync();

@@ -7,6 +7,8 @@ export const createUsuario = async (req, res) =>{
     const newPass = md5(password);
     try {
 
+        if(nombre == "" || apellido == "" || email=="" ||password=="")return res.status(400).json({message:'Los campos no pueden estar vacios'})
+        
         const userExist = await Usuario.findOne({where: {email}})
 
         if(userExist){

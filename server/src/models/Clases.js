@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../dataBase/config.js';
-// import { Citas } from './Citas.js';
 
 export const Clases = sequelize.define('Clases',{
     titulo:{
@@ -24,10 +23,3 @@ export const Clases = sequelize.define('Clases',{
 },{
     timestamps: false
 })
-
-
-// Citas.belongsToMany(Clases,{through:'CitasClases'});
-// Clases.belongsToMany(Citas,{through:'CitasClases'});
-
-
-// await sequelize.sync();
