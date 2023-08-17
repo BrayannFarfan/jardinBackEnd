@@ -6,7 +6,7 @@ import { AuthSession } from '../middleware/authMiddleware.js'
 
 /**
  * @swagger
- * /api/contacto:
+ * /api/contactos:
  *   post:
  *     summary: Manda tu mensaje para mas informacion  
  *     description: Manda tu mensaje para mas informacion
