@@ -12,6 +12,7 @@ import { RegistroRouter } from './routes/registerRouter.js';
 import { fileURLToPath } from 'url';
 import { swaggerSpec } from './middleware/swaggerConfig.js';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -22,6 +23,7 @@ const __dirname = path.dirname(__filename);
 
 
 app.use(express.json());
+app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/citas', citasRouter);
 app.use('/api/clases', clasesRouter);
