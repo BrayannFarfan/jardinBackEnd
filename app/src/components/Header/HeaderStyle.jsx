@@ -1,21 +1,14 @@
 import styled from 'styled-components';
-import { RiBearSmileFill } from "react-icons/ri";
 import { Navbar, Container} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export const Headers = styled(Container)`
-    background-color: #ffffff;
+    background-color: #fff;
 `;
-export const Icon = styled(RiBearSmileFill)`
-    color:#17A2B8;
-    font-size: 3rem;
-    //margin: 0 15px 0 0;
-    
-`;
-
 export const Title = styled(Navbar.Brand)`
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'Nunito', sans-serif;
-    font-weight: 700;
+    font-weight: 900;
     color:#17A2B8;
     display:flex;
     align-items:center;    
@@ -23,6 +16,17 @@ export const Title = styled(Navbar.Brand)`
         color:#17A2B8;
     }
     @media (max-width: 600px){
-        font-size: 2rem;
+        display: none;
+    }
+`;
+export const StyledLink = styled(Link)`
+    color: #333;
+    margin: 0 1rem;
+    text-decoration: none;
+`;
+export const Image = styled.img`
+    max-width: 50px;
+    @media (max-width: 600px){
+        display: block;
     }
 `;

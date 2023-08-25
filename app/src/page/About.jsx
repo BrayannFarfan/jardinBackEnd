@@ -1,9 +1,10 @@
-import { Header } from '../components/Header/Header.jsx'
+import  Header  from '../components/Header/Header.jsx'
 
-export const About = () => {
+export default function About(){
   return (
     <>
         <Header/>
+        <h1>soy about</h1>
     </>
   )
 }

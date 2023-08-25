@@ -1,0 +1,18 @@
+/* CSS HEX */
+--genoa: #177e59;
+--sea-green: #348e6b;
+--ocean-green: #3f9f77;
+
+
+/* SCSS HEX */
+$genoa: #177e59;
+$sea-green: #348e6b;
+$ocean-green: #3f9f77;
+
+
+/* SCSS RGB */
+--genoa: rgba(23,126,89,1);
+--sea-green: rgba(52,142,107,1);
+--ocean-green: rgba(63,159,119,1);
+
+

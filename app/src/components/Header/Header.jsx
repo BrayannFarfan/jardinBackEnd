@@ -1,15 +1,16 @@
 import { Container , Nav, Navbar} from 'react-bootstrap';
-import { Icon, Title, Headers } from "./HeaderStyle.jsx";
+import { Title, Headers, Image, StyledLink  } from "./HeaderStyle.jsx";
 
-export const Header = () => {
+
+export default function Header(){
   return (
     <>
        <Headers fluid>
         <Navbar expand="lg">
           <Container fluid className='mx-sm-5'>
-            <Title href="#">
-              <Icon/>
-              KidKinder
+              <Image src="./Proyectonuevo.png"/>
+            <Title>
+              Sonrisas
             </Title>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -17,8 +18,9 @@ export const Header = () => {
               className="ms-auto my-2 "
               navbarScroll
             >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
+              <StyledLink to={"/home"}>Home</StyledLink>
+              <StyledLink to={"/about"}>About</StyledLink>
+              <StyledLink to={"/class"}>Class</StyledLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
