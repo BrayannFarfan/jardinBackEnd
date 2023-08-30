@@ -6,6 +6,7 @@ const Login = React.lazy(() => import('./page/Login.jsx'));
 const Home = React.lazy(() => import('./page/Home.jsx'));
 const About = React.lazy(()=> import('./page/About.jsx'));
 const Class = React.lazy(()=> import('./page/Classes.jsx'));
+const Dashboard = React.lazy(()=> import('./page/Dashboard.jsx'))
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <BrowserRouter>
               <Routes>
                 <Route path='/' element={<Login/>}/>
+                <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/home' element={<Home/>}/>
                 <Route path='/about' element={<About/>}/>
                 <Route path='/class' element={<Class/>}/>
