@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import {  useState, useContext } from 'react';
 import { ContainerLogin, FormContainer, Form, Input, Label, IconUser, IconLock, LinkPass, InputSubmit, DivEmail, Instagram, Messenger, Youtube, Image, DivSection, Title, User,Dividor , Divider, DividerDos, DivRegister, Account, Right, DivRedes } from './LoginStyled.jsx';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { AuthContext } from '../../context/createContext.js';
 
 
 export default function ComponentLogin() {
-
+  
+  const { login, setEmail, setPassword } = useContext(AuthContext);
   const navigate = useNavigate()
-  const [ token, setToken ] = useState('');
   const [dataInput, setDataInput ] = useState({
     email:"",
     password:""
@@ -23,28 +22,15 @@ export default function ComponentLogin() {
   }
 
 
-  const handleSubmit = async (e) =>{
+  const handleLogin = async (e) =>{
     e.preventDefault();
       if((dataInput.email === "") || (dataInput.password === "")){
         return console.log('ingrese datos');
       } else{
-        const peticion = await axios.post('http://localhost:3000/api/login',dataInput
-        )
-        .then(res => {
-          if(res.data){
-            console.log(res.data.token);
-            const authToken = res.data.token;
-            Cookies.set('authToken', authToken, {expires: 1})
-            setToken(authToken);
-            navigate('/dashboard')
-          }
-        })
-        .catch(err =>{
-          console.log(err);
-          if(err.response.status === 500){
-            alert('datos incorrectos');
-          }
-        })
+        login();
+        setEmail(dataInput.email);
+        setPassword(dataInput.password);
+        navigate('/dashboard');
     }
   }
 
@@ -63,7 +49,7 @@ export default function ComponentLogin() {
               <Title>Millions of solutions found</Title>
               <DividerDos></DividerDos>
           </DivSection>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleLogin}>
             <DivEmail>
               <Label>Email / Username</Label>
               <Input
