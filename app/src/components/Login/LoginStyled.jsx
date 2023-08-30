@@ -160,7 +160,6 @@ export const DivRedes = styled.section`
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    background: #00DFB0;
     border-radius: 15px;
     width: 95%;
     height: 15%;

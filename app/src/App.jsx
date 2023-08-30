@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Loader } from './components/Loader/Loader.jsx'
 import StateContext from './context/StateContext.jsx';
 const Login = React.lazy(() => import('./page/Login.jsx'));
+const Register = React.lazy(() => import('./page/Register.jsx'));
 const Home = React.lazy(() => import('./page/Home.jsx'));
 const About = React.lazy(()=> import('./page/About.jsx'));
 const Class = React.lazy(()=> import('./page/Classes.jsx'));
@@ -17,6 +18,7 @@ function App() {
           <BrowserRouter>
               <Routes>
                 <Route path='/' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
                 <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/home' element={<Home/>}/>
                 <Route path='/about' element={<About/>}/>

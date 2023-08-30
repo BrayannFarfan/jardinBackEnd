@@ -1,16 +1,17 @@
-import {  useState, useContext } from 'react';
-import { ContainerLogin, FormContainer, Form, Input, Label, IconUser, IconLock, LinkPass, InputSubmit, DivEmail, Instagram, Messenger, Youtube, Image, DivSection, Title, User,Dividor , Divider, DividerDos, DivRegister, Account, Right, DivRedes } from './LoginStyled.jsx';
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { ContainerLogin, FormContainer, Form, Input, Label, IconUser, IconLock, LinkPass, InputSubmit, DivEmail, Instagram, Messenger, Youtube, Image, DivSection, Title, User,Dividor , Divider, DividerDos, DivRegister, Account, Right} from '../Login/LoginStyled.jsx';
 import { AuthContext } from '../../context/createContext.js';
 
-
-export default function ComponentLogin() {
+export default function ComponentRegister() {
   
-  const { login, setEmail, setPassword, email, password } = useContext(AuthContext);
+  const { setEmail, setPassword, setLastName, setName, register} = useContext(AuthContext);
   const navigate = useNavigate()
   const [dataInput, setDataInput ] = useState({
     email:"",
-    password:""
+    password:"",
+    nombre:'',
+    apellido:''
   })
 
   const handleform = (e) =>{
@@ -22,18 +23,18 @@ export default function ComponentLogin() {
   }
 
 
-  const handleLogin = async (e) =>{
+  const handleRegister = async (e) =>{
     e.preventDefault();
       if((dataInput.email === "") || (dataInput.password === "")){
-        return alert('Los campos son obligatorios');
-      } else if(dataInput.email !== email || dataInput.password !== password){
-        return alert('el usuario no existe')
-      }else{
-        login();
+        return console.log('ingrese datos');
+      } else{
+        register();
         setEmail(dataInput.email);
+        setLastName(dataInput.apellido);
+        setName(dataInput.nombre);
         setPassword(dataInput.password);
-        navigate('/dashboard');
-      }
+        navigate('/');
+    }
   }
 
  
@@ -45,17 +46,39 @@ export default function ComponentLogin() {
           <DivSection>
               <Image src='./Proyectonuevo.png' alt='LOGO'/>
               <Dividor>
-                <User>User Login</User>
+                <User>User Register</User>
                 <Divider></Divider>
               </Dividor>
-              <Title>Millions of solutions found</Title>
+              <Title>Little Explorers Registration</Title>
               <DividerDos></DividerDos>
           </DivSection>
-          <Form onSubmit={handleLogin}>
+          <Form onSubmit={handleRegister}>
+          <DivEmail>
+              <Label>Name</Label>
+              <Input
+              type="text"
+              placeholder='jhon'
+              name='nombre'
+              onChange={handleform}
+              value={dataInput.name}
+              />
+              <IconUser/>
+            </DivEmail>
+            <DivEmail>
+              <Label>Last Name</Label>
+              <Input
+              type="text"
+              placeholder='Doe'
+              name='apellido'
+              onChange={handleform}
+              value={dataInput.lastName}
+              />
+              <IconUser/>
+            </DivEmail>
             <DivEmail>
               <Label>Email / Username</Label>
               <Input
-              // autoComplete="off"
+              autocomplete="off"
               type="email"
               placeholder='a@example.com'
               name='email'
@@ -76,22 +99,14 @@ export default function ComponentLogin() {
               <IconLock/>
             </DivEmail>
             <DivEmail>
-              <LinkPass to="/forget-password">Forget Password</LinkPass>
-            </DivEmail>
-            <DivEmail>
-              <InputSubmit type="submit" value={'log in'} />
+              <InputSubmit type="submit" value={'sign up'} />
             </DivEmail>
           </Form>
           <DivRegister>
-            <p>No Account Yet?</p>
-            <Account to="/register">Registered</Account>
+            <p>Do you already have an account?</p>
+            <Account to="/">Log In</Account>
             <Right/>
           </DivRegister>
-          <DivRedes>
-              <Instagram />
-              <Messenger/>
-              <Youtube/>
-          </DivRedes>
         </FormContainer>
       </ContainerLogin>
     </>

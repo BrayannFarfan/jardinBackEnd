@@ -1,7 +1,10 @@
 import React from 'react'
+import ComponentRegister from '../components/Register/ComponentRegister'
 
-export const Register = () => {
+export default function Register(){
   return (
-    <div>Register</div>
+    <>
+      <ComponentRegister/>
+    </>
   )
 }
