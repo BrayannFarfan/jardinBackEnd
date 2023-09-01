@@ -35,14 +35,20 @@ export default function ComponentRegister() {
         return
       } 
       try {
-        register(formData);
+        await register(formData);
         setHandleError("se registro correctamente")
         setTimeout(() => {
           setHandleError("")
           navigate('/');
         }, 2000);
+        return
       } catch (error) {
-        return setHandleError('ocurrio un problema intentelo otra vez')
+        setHandleError('el email ya se encuentra registrado.');
+        setDataInput({email:"",password:"",nombre:"",apellido:""})
+        setTimeout(() => {
+          setHandleError("")
+        }, 2000);
+        return
       }
 
   }
