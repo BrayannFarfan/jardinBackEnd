@@ -6,16 +6,16 @@ import { AuthContext } from '../../context/createContext.js';
 
 export default function ComponentLogin() {
   
-  const { login, setEmail, setPassword, email, password } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const [dataInput, setDataInput ] = useState({
+  const navigate = useNavigate();
+  const { login , loading, handleError, setHandleError} = useContext(AuthContext);
+  const [formData, setFormData ] = useState({
     email:"",
     password:""
   })
 
   const handleform = (e) =>{
     const { name, value } = e.target
-    setDataInput((even) =>({
+    setFormData((even) =>({
       ...even,
       [ name ] : value
     }));
@@ -24,22 +24,31 @@ export default function ComponentLogin() {
 
   const handleLogin = async (e) =>{
     e.preventDefault();
-      if((dataInput.email === "") || (dataInput.password === "")){
-        return alert('Los campos son obligatorios');
-      } else if(dataInput.email !== email || dataInput.password !== password){
-        return alert('el usuario no existe')
-      }else{
-        login();
-        setEmail(dataInput.email);
-        setPassword(dataInput.password);
+    if((formData.email === "") || (formData.password === "")){
+      setHandleError('Los campos son obligatorios');
+      setTimeout(() => {
+        setHandleError("")
+      }, 2000);
+      return
+    }
+    try {
+        await login(formData);
         navigate('/dashboard');
-      }
+    } catch (error) {
+        setHandleError("Hubo un error en el inicio de sesión.Revise el email o contraseña e Intente de nuevo."); 
+        setFormData({email:"",password:""})
+        setTimeout(() => {
+          setHandleError("")
+        }, 2000);
+        return
+    } 
   }
 
  
 
   return (
     <>
+      
       <ContainerLogin>
         <FormContainer>
           <DivSection>
@@ -50,6 +59,7 @@ export default function ComponentLogin() {
               </Dividor>
               <Title>Millions of solutions found</Title>
               <DividerDos></DividerDos>
+              {handleError && <p style={{color:'red'}}>{handleError}</p>}
           </DivSection>
           <Form onSubmit={handleLogin}>
             <DivEmail>
@@ -60,7 +70,7 @@ export default function ComponentLogin() {
               placeholder='a@example.com'
               name='email'
               onChange={handleform}
-              value={dataInput.email}
+              value={formData.email}
               />
               <IconUser/>
             </DivEmail>
@@ -71,16 +81,16 @@ export default function ComponentLogin() {
               placeholder='***********'
               name='password'
               onChange={handleform}
-              value={dataInput.password}
+              value={formData.password}
                />
               <IconLock/>
             </DivEmail>
             <DivEmail>
               <LinkPass to="/forget-password">Forget Password</LinkPass>
             </DivEmail>
-            <DivEmail>
-              <InputSubmit type="submit" value={'log in'} />
-            </DivEmail>
+              <DivEmail>
+                {loading ? <InputSubmit type="submit" value={'Cargando...'}/>: <InputSubmit type="submit" value={'log in'}/>}
+              </DivEmail>
           </Form>
           <DivRegister>
             <p>No Account Yet?</p>
@@ -94,6 +104,7 @@ export default function ComponentLogin() {
           </DivRedes>
         </FormContainer>
       </ContainerLogin>
+      
     </>
   )
 }

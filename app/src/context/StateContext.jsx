@@ -4,58 +4,57 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
+
 const StateContext = ({ children }) => {
 
     const [ token, setToken ] = useState();
-    const [ email , setEmail ] = useState('')
-    const [ password , setPassword ] = useState('')
-    const [ nombre, setName ] = useState('')
-    const [ apellido, setLastName ] = useState('')
+    const [ user, setUser ] = useState(null);
+    const [ loading, setLoanding ] = useState(false)
+    const [ handleError, setHandleError ] = useState('')
 
-    const login = async () =>{
-        await axios.post('http://localhost:3000/api/login',{password, email}
-        )
-        .then(res => {
-          if(res.data){
-            const authToken = res.data.token;
-            Cookies.set('authToken', authToken, {expires: 1})
-            setToken(authToken);
-          }
-        })
-        .catch(err =>{
-          console.log(err);
-          if(err.response.status === 500){
-            return alert('el usuario no existe');
-          }
-        })
-    }
 
-    const register = async ()=>{
-      await axios.post('http://localhost:3000/api/register',{nombre, apellido, email, password})
-      .then( res =>{
-        if(res.data){
-            console.log(res.data);
+    const login = async (dataLogin) =>{
+      try{
+            setLoanding(true)
+            const response = await axios.post('http://localhost:3000/api/login', dataLogin )
+            const authToken = response.data.token;
+            Cookies.set( 'authToken', authToken,{ expires: 1} );
+            setToken( authToken );
+      } catch(error){
+        if (error.response && error.response.status === 500) {
+          throw new Error( "Hubo un error en el servidor" );
         }
-      })
-      .catch(err =>{
-        console.log(err);
-        if(err.response.status === 400){
-          alert('Los campos no pueden estar vacios')
+        throw new Error( "Error de autenticación" );
+       } finally{
+          setLoanding(false)
+       }
+      }
+
+    const register = async (userData)=>{
+      try {
+        setLoanding(true)
+        const response = await axios.post('http://localhost:3000/api/register', userData );
+        setUser(response);
+      } catch (error) {
+        if(error.response && error.response.status === 400){
+          throw new Error('Hubo un error en el servidor')
         }
-      })
+        throw new Error('Error de Creación')
+      } finally{
+        setLoanding(false)
+      }
     }
 
   return (
     <AuthContext.Provider
         value={{
-            login,
-            setEmail,
-            setPassword,
-            setName,
-            setLastName,
             register,
-            email,
-            password
+            login,
+            token,
+            user,
+            loading,
+            handleError,
+            setHandleError
         }}
     >
         { children}

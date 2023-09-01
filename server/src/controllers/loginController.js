@@ -7,13 +7,13 @@ export const getOneUser = async (req , res) =>{
     const { email , password } = req.body; 
 
     try {
-        if(email == "" && password == "")  throw new BusinessError('datos Obligatorios', 500)
+        if(email == "" && password == "")  throw new BusinessError('datos Obligatorios', 400)
         const getOneUser = await Usuario.findOne({
             where:{
                 email
             }})
             if(!getOneUser){
-                throw new BusinessError('el usuario no existe', 400)
+                throw new BusinessError('el usuario no existe', 401)
             } 
 
             const comparePass = md5(password); 

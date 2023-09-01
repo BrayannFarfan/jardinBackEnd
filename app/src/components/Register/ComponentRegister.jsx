@@ -1,17 +1,17 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { ContainerLogin, FormContainer, Form, Input, Label, IconUser, IconLock, LinkPass, InputSubmit, DivEmail, Instagram, Messenger, Youtube, Image, DivSection, Title, User,Dividor , Divider, DividerDos, DivRegister, Account, Right} from '../Login/LoginStyled.jsx';
+import { ContainerLogin, FormContainer, Form, Input, Label, IconUser, IconLock, LinkPass, InputSubmit, DivEmail, Image, DivSection, Title, User,Dividor , Divider, DividerDos, DivRegister, Account, Right} from '../Login/LoginStyled.jsx';
 import { AuthContext } from '../../context/createContext.js';
 
 export default function ComponentRegister() {
   
-  const { setEmail, setPassword, setLastName, setName, register} = useContext(AuthContext);
   const navigate = useNavigate()
-  const [dataInput, setDataInput ] = useState({
-    email:"",
-    password:"",
+  const { register , loading, handleError, setHandleError } = useContext(AuthContext);
+  const [formData, setDataInput ] = useState({
     nombre:'',
-    apellido:''
+    apellido:'',
+    email:"",
+    password:""
   })
 
   const handleform = (e) =>{
@@ -23,21 +23,29 @@ export default function ComponentRegister() {
   }
 
 
+
+
   const handleRegister = async (e) =>{
     e.preventDefault();
-      if((dataInput.email === "") || (dataInput.password === "")){
-        return console.log('ingrese datos');
-      } else{
-        register();
-        setEmail(dataInput.email);
-        setLastName(dataInput.apellido);
-        setName(dataInput.nombre);
-        setPassword(dataInput.password);
-        navigate('/');
-    }
-  }
+      if((formData.email === "") || (formData.password === "") || (formData.nombre === "") || (formData.apellido === "")){
+        setHandleError('Los campos son obligatorios');
+        setTimeout(() => {
+          setHandleError("")
+        }, 2000);
+        return
+      } 
+      try {
+        register(formData);
+        setHandleError("se registro correctamente")
+        setTimeout(() => {
+          setHandleError("")
+          navigate('/');
+        }, 2000);
+      } catch (error) {
+        return setHandleError('ocurrio un problema intentelo otra vez')
+      }
 
- 
+  }
 
   return (
     <>
@@ -51,6 +59,7 @@ export default function ComponentRegister() {
               </Dividor>
               <Title>Little Explorers Registration</Title>
               <DividerDos></DividerDos>
+              {handleError && <p style={{color:'red'}}>{handleError}</p>}
           </DivSection>
           <Form onSubmit={handleRegister}>
           <DivEmail>
@@ -60,7 +69,7 @@ export default function ComponentRegister() {
               placeholder='jhon'
               name='nombre'
               onChange={handleform}
-              value={dataInput.name}
+              value={formData.nombre}
               />
               <IconUser/>
             </DivEmail>
@@ -71,19 +80,18 @@ export default function ComponentRegister() {
               placeholder='Doe'
               name='apellido'
               onChange={handleform}
-              value={dataInput.lastName}
+              value={formData.apellido}
               />
               <IconUser/>
             </DivEmail>
             <DivEmail>
               <Label>Email / Username</Label>
               <Input
-              autocomplete="off"
               type="email"
               placeholder='a@example.com'
               name='email'
               onChange={handleform}
-              value={dataInput.email}
+              value={formData.email}
               />
               <IconUser/>
             </DivEmail>
@@ -94,12 +102,12 @@ export default function ComponentRegister() {
               placeholder='***********'
               name='password'
               onChange={handleform}
-              value={dataInput.password}
+              value={formData.password}
                />
               <IconLock/>
             </DivEmail>
             <DivEmail>
-              <InputSubmit type="submit" value={'sign up'} />
+              {loading ? <InputSubmit type="submit" value={'Cargando...'}/> :  <InputSubmit type="submit" value={'sign up'} />}
             </DivEmail>
           </Form>
           <DivRegister>
