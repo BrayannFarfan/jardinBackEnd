@@ -8,7 +8,7 @@ const Register = React.lazy(() => import('./page/Register.jsx'));
 const Home = React.lazy(() => import('./page/Home.jsx'));
 const About = React.lazy(()=> import('./page/About.jsx'));
 const Class = React.lazy(()=> import('./page/Classes.jsx'));
-const Dashboard = React.lazy(()=> import('./page/Dashboard.jsx'))
+const Dashboard = React.lazy(()=> import('./page/Dashboard/Dashboard.jsx'))
 
 function App() {
   return (
