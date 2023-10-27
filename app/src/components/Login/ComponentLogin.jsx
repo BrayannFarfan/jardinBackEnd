@@ -33,7 +33,7 @@ export default function ComponentLogin() {
     }
     try {
         await login(formData);
-        navigate('/dashboard');
+        navigate('/users');
     } catch (error) {
         setHandleError("Hubo un error en el inicio de sesión.Revise el email o contraseña e Intente de nuevo."); 
         setFormData({email:"",password:""})

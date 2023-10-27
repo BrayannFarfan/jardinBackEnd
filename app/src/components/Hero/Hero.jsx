@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { HeroSection, BackgroundYellow, NewsInfo } from './StyledHero.jsx';
+import { Image } from '../Header/HeaderStyle.jsx';
 
 export const Hero = () => {
   return (
     <>
-      <h1>soy la home</h1>
+      <HeroSection>
+        <BackgroundYellow>
+          <NewsInfo>
+            <Image src='./assets/logof.png' />
+            <h1>INSCRIPCIONES 2024</h1>
+          </NewsInfo>
+        </BackgroundYellow>
+      </HeroSection>
     </>
   )
 }

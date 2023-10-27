@@ -9,6 +9,7 @@ const Home = React.lazy(() => import('./page/Home.jsx'));
 const About = React.lazy(()=> import('./page/About.jsx'));
 const Class = React.lazy(()=> import('./page/Classes.jsx'));
 const Dashboard = React.lazy(()=> import('./page/Dashboard/Dashboard.jsx'))
+const Users = React.lazy(()=> import('./page/Users.jsx'))
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
                 <Route path='/' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/dashboard' element={<Dashboard/>}/>
-                <Route path='/home' element={<Home/>}/>
-                <Route path='/about' element={<About/>}/>
-                <Route path='/class' element={<Class/>}/>
+                <Route path='/users' element={<Users/>}/>
+                <Route path='/sedes' element={<Home/>}/>
+                <Route path='/burbujas' element={<About/>}/>
+                <Route path='/contacto' element={<Class/>}/>
               </Routes>
           </BrowserRouter>
         </Suspense>

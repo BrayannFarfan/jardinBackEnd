@@ -5,7 +5,7 @@ import HeaderBar from './Sidebar/HeaderBar.jsx';
 export default function Dashboard(){
   return (
     <>
-      {/* <HeaderBar/> */}
+      <HeaderBar/>
       <Sidebar/>
     </>
   )

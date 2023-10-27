@@ -1,12 +1,8 @@
-import Header  from '../components/Header/Header.jsx';
-import { Hero } from '../components/Hero/Hero.jsx';
+import React from 'react'
+import Header from '../components/Header/Header'
 
-export default function Home () {
+export default function  Home(){
   return (
-    <>
-      <Header/>
-      <Hero/>
-    </>
+    <Header/>
   )
 }
-

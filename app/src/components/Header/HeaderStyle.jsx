@@ -8,20 +8,21 @@ export const Headers = styled(Container)`
 export const Title = styled(Navbar.Brand)`
     font-size: 2rem;
     font-family: 'Nunito', sans-serif;
-    font-weight: 900;
-    color:#17A2B8;
+    font-weight: 800;
+    color: #00DFB0;
     display:flex;
     align-items:center;    
     &:hover, &:focus{
-        color:#17A2B8;
+        color:#00DFB0;
     }
     @media (max-width: 600px){
         display: none;
     }
 `;
 export const StyledLink = styled(Link)`
-    color: #333;
+    color: #00DFB0;
     margin: 0 1rem;
+    font-weight: 800;
     text-decoration: none;
 `;
 export const Image = styled.img`

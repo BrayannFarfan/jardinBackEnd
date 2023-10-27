@@ -8,7 +8,7 @@ export default function Header(){
        <Headers fluid>
         <Navbar expand="lg">
           <Container fluid className='mx-sm-5'>
-              <Image src="./Proyectonuevo.png"/>
+            <Image src="./assets/logo.png"/>
             <Title>
               Sonrisas
             </Title>
@@ -18,9 +18,10 @@ export default function Header(){
               className="ms-auto my-2 "
               navbarScroll
             >
-              <StyledLink to={"/home"}>Home</StyledLink>
-              <StyledLink to={"/about"}>About</StyledLink>
-              <StyledLink to={"/class"}>Class</StyledLink>
+              <StyledLink to={"/users"}>Home</StyledLink>
+              <StyledLink to={"/sedes"}>Sedes</StyledLink>
+              <StyledLink to={"/burbujas"}>Burbujas</StyledLink>
+              <StyledLink to={"/contacto"}>Contacto</StyledLink>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -7,8 +7,8 @@ export const TopNavBars = styled(Nav)`
     padding: 13px;
     margin-top: -10px;
     padding-right: 0;
-    margin-left: -10px;
-    margin-right: -10px;
+    // margin-left: -10px;
+    // margin-right: -10px;
     text-align: center;
     font-style: Georgia;
     font-size: 20px;
